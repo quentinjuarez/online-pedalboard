@@ -1,0 +1,256 @@
+
+/* Pedals */
+
+.pedalboardPedals {
+  display: flex;
+  justify-content: center; 
+  padding: 20px 0;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.pedalContainer {
+  border-radius: 1rem;
+  box-shadow: var(--shadow), inset 0 2px 1px 1px var(--light);
+  padding: 20px 0;
+  margin: 1rem 0.5rem;
+  flex-basis: 220px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  text-shadow: -0.06em 0.06em rgba(0, 0, 0, 0.2);
+  background: var(--grad);
+  min-width: 220px;
+}
+
+.presetConfig {
+  display: flex;
+  width:fit-content;
+  margin: 1rem auto;
+}
+
+.presetVisual{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.presetInfosHidden{
+  opacity: 0;
+  margin: 1rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: default;
+}
+ 
+.presetInfos{
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 1rem;
+  background: var(--contrast);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 2rem;
+  /* box-shadow: var(--shadow); */
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+.presetInput {
+  outline: none;
+  background: var(--darker);
+  color: var(--light);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  width: 50%;
+  font-family: "seven_segmentregular";
+}
+
+.pedalPresets {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.pedalPresets > * {
+  padding: 0rem 1rem;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.pedal:after {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.pedalKnobs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 280px;
+  flex: 1;
+}
+
+.pedalKnobs > * {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-basis: calc(50% - 2rem);
+}
+
+.pedalKnobs label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.pedalKnobs input,
+.pedalToggle input {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+.pedalVisual {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 280px;
+  flex: 1;
+}
+
+.pedalVisual > * {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-basis: calc(50% - 20px);
+  border: 2px solid var(--contrast);
+  border-radius: 10px;
+  background: var(--dark);
+}
+.pedalKnob {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100%;
+  background: var(--dark);
+  position: relative;
+  transform: rotate(calc(var(--percentage, 0) * 1deg));
+  margin-top: 5px;
+}
+
+.pedalKnob:before {
+  content: "";
+  position: absolute;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  background: transparent;
+  left: 0%;
+  top: 0%;
+  box-shadow: inset 0 0 0 2px black, inset 0 1px 2px 2px #c3bfc380;
+  transform: rotate(calc(360deg - calc(var(--percentage, 0) * 1deg)));
+}
+
+.pedalKnob:after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: rgb(0, 0, 0);
+  left: 30%;
+  top: 75%;
+  /* margin: 0 0 0 -1px; */
+  box-shadow: inset 0 0 5px 2px var(--primary), 0 0 1px 1px var(--primary-dark);
+  transition: box-shadow 0.2s;
+  transform-origin: 50% 100%;
+  transform: rotate(-150deg);
+}
+
+.pedalTicks {
+  position: absolute;
+  transform-origin: center top;
+}
+
+.tick {
+  position: absolute;
+  background: var(--text-light);
+  box-shadow: inset 0 0 0 0 var(--text-light);
+  width: 2px;
+  transition: box-shadow 0.2s;
+  height: 2.3rem;
+  left: 0px;
+  top: 15px;
+  transform-origin: center top;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.tick.active {
+  box-shadow: inset 0 0 5px 2px var(--primary), 0 0 3px 1px var(--primary-dark);
+}
+
+.pedalToggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 60px);
+}
+
+.pedalButton {
+  -webkit-tap-highlight-color: transparent;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background: var(--dark);
+  box-shadow: var(--toggle);
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 200%;
+  /* border: 1px solid rgb(24, 24, 24); */
+  display: block;
+  cursor: pointer;
+}
+
+.pedalLed {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--contrast);
+  box-shadow: inset 0 0 0 0px var(--contrast);
+  transition: box-shadow 0.2s;
+  border-radius: 50%;
+  margin: 1.5rem 0 1rem;
+}
+
+.pedalToggle input:checked ~ .pedalLed {
+  box-shadow: inset 0 0 0 20px var(--primary), 0 0 20px 2px var(--primary-dark);
+}
+
+.pedal h2 {
+  margin: 0.5rem 0 0;
+  font-size: 1.5rem;
+}

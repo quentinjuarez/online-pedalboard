@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <link
+      rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+    <link rel="stylesheet" id="text/css" href="css/style.css" />
+    <link rel="stylesheet" id="text/css" href="css/pedal.css" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicons/apple-touch-icon.png"
+    />
+    <link rel="shortcut icon" href="/favicons/android-chrome-512x512.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicons/favicon-16x16.png"
+    />
+    <link
+      rel="mask-icon"
+      href="/favicons/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <!-- <link rel="manifest" href="/site.webmanifest" /> -->
+
+    <meta name="twitter:card" content="Online Pedalboard" />
+    <meta name="twitter:site" content="@quentinpablo" />
+    <meta name="twitter:creator" content="@quentinpablo" />
+    <meta property="og:url" content="https://pedalboard-js.herokuapp.com/" />
+    <meta property="og:title" content="Online Pedalboard" />
+    <meta
+      property="og:description"
+      content="Online JavaScript Pedalboard with WebAudioAPI"
+    />
+    <meta property="og:image" content="/favicons/android-chrome-512x512.png" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/utils.js"></script>
+    <script src="js/analyseur.js"></script>
+    <script src="js/effects.js"></script>
+
+    <title>Online Pedalboard</title>
+  </head>
+
+  <body class="color">
+    <div class="mainContainer">
+      <div class="headerContainer">
+        <div class="toggleContainer"></div>
+
+        <div class="colorContainer">
+          <div id="color-range" class="colorRange">
+            <div id="color-picker" class="colorPicker"></div>
+          </div>
+          <script src="js/color.js"></script>
+        </div>
+
+        <div class="toggleContainer">
+          <label class="toggleSwitch">
+            <input type="checkbox" checked />
+            <span class="toggleInput"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="startContainer">
+        <div class="startTitle">Online Pedalboard</div>
+        <h1 class="startBtn">Start</h1>
+        <div class="startInfo">
+          Made by
+          <a
+            target="_blank"
+            href="https://linkedin.com/in/quentin-juarez-757b5a192"
+            >Quentin Juarez</a
+          >
+        </div>
+      </div>
+
+      <div class="pedalboardContainer">
+        <div id="config" class="pedalContainer presetConfig">
+          <div class="presetVisual">
+            <div class="presetInfosHidden">i
+             
+            </div>
+            <input
+              class="presetInput"
+              id="preset_title"
+              placeholder="Preset A"
+              onchange="saveTitle(this.value)"
+            />
+            <div class="presetInfos">i
+              <span class="presetTooltip">
+                <div class="presetInfosList">
+                  <p>Select a preset: short click</p>
+                  <p>Save a preset: hold click</p>
+                  <p>Change the title</p>
+                </div>
+              </span>
+            </div>
+          </div>
+
+          <div class="pedalPresets">
+            <div class="pedalToggle">
+              <input id="config_a" type="checkbox" checked />
+              <output class="pedalLed"></output>
+              <label for="config_a" id="preset_0" class="pedalButton"
+                >Enable / Disable</label
+              >
+              <h2>A</h2>
+            </div>
+            <div class="pedalToggle">
+              <input id="config_b" type="checkbox" />
+              <output class="pedalLed"></output>
+              <label for="config_b" id="preset_1" class="pedalButton"
+                >Enable / Disable</label
+              >
+              <h2>B</h2>
+            </div>
+            <div class="pedalToggle">
+              <input id="config_c" type="checkbox" />
+              <output class="pedalLed"></output>
+              <label for="config_c" id="preset_2" class="pedalButton"
+                >Enable / Disable</label
+              >
+              <h2>C</h2>
+            </div>
+            <div class="pedalToggle">
+              <input id="config_d" type="checkbox" />
+              <output class="pedalLed"></output>
+              <label for="config_d" id="preset_3" class="pedalButton"
+                >Enable / Disable</label
+              >
+              <h2>D</h2>
+            </div>
+          </div>
+
+          <h2>Presets</h2>
+        </div>
+
+        <div class="pedalboardPedals">
+          <div id="start" class="pedalContainer">
+            <ul class="pedalKnobs">
+              <li>
+                <div class="pedalTicks" id="start_v_ticks" data-nb-ticks="20"></div>
+                <label for="start_v">Vol</label>
+                <input
+                  type="range"
+                  id="start_i_v"
+                  name="start_v"
+                  min="0"
+                  max="1"
+                  value="0.8"
+                  step="0.02"
+                />
+                <button
+                  type="button"
+                  id="start_k_v"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+            </ul>
+            <div class="pedalToggle">
+              <input
+                id="start_active"
+                type="checkbox"
+                onchange="sample.setInput(!sample._volState);"
+              />
+              <output class="pedalLed"></output>
+              <label for="start_active" class="pedalButton"
+                >Enable / Disable</label
+              >
+            </div>
+            <h2>Start</h2>
+          </div>
+
+          <div id="tuner" class="pedalContainer">
+            <ul class="pedalVisual">
+              <canvas id="tunercanvas" width="200" height="200"></canvas>
+            </ul>
+            <div class="pedalToggle">
+              <input
+                id="tuner_active"
+                checked
+                type="checkbox"
+                onchange="toggleTuner()"
+              />
+              <output class="pedalLed"></output>
+              <label for="tuner_active" class="pedalButton"
+                >Enable / Disable</label
+              >
+            </div>
+            <h2>Tuner</h2>
+          </div>
+
+          <div id="over" class="pedalContainer">
+            <ul class="pedalKnobs">
+              <li>
+                <div class="pedalTicks" id="over_d_ticks" data-nb-ticks="20"></div>
+                <label for="over_d">Drive</label>
+                <input
+                  type="range"
+                  id="over_i_d"
+                  name="over_d"
+                  min="0"
+                  max="0.7"
+                  value="0.34"
+                  step="0.02"
+                />
+                <button
+                  type="button"
+                  id="over_k_d"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+              <li>
+                <div class="pedalTicks" id="over_t_ticks" data-nb-ticks="6"></div>
+                <label for="over_t">TYPE</label>
+                <input
+                  type="range"
+                  id="over_i_t"
+                  name="over_t"
+                  min="0"
+                  max="1"
+                  value="0"
+                  step="0.2"
+                />
+                <button
+                  type="button"
+                  id="over_k_t"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+              <li>
+                <div class="pedalTicks" id="over_v_ticks" data-nb-ticks="20"></div>
+                <label for="over_v">Vol</label>
+                <input
+                  type="range"
+                  id="over_i_v"
+                  name="over_v"
+                  min="0"
+                  max="1"
+                  value="0.5"
+                  step="0.02"
+                />
+                <button
+                  type="button"
+                  id="over_k_v"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+            </ul>
+            <div class="pedalToggle">
+              <input
+                id="over_active"
+                type="checkbox"
+                onchange="sample.setOver(!sample._overState);"
+              />
+              <output class="pedalLed"></output>
+              <label for="over_active" class="pedalButton"
+                >Enable / Disable</label
+              >
+            </div>
+            <h2>Overdrive</h2>
+          </div>
+
+          <div id="filter" class="pedalContainer">
+            <ul class="pedalKnobs">
+              <li>
+                <div class="pedalTicks" id="filter_l_ticks" data-nb-ticks="20"></div>
+                <label for="filter_l">Low</label>
+                <input
+                  type="range"
+                  id="filter_i_l"
+                  name="filter_l"
+                  min="0"
+                  max="1"
+                  value="0.5"
+                  step="0.05"
+                />
+                <button
+                  type="button"
+                  id="filter_k_l"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+              <li>
+                <div class="pedalTicks" id="filter_m_ticks" data-nb-ticks="20"></div>
+                <label for="filter_m">Mid</label>
+                <input
+                  type="range"
+                  id="filter_i_m"
+                  name="filter_m"
+                  min="0"
+                  max="1"
+                  value="0.5"
+                  step="0.05"
+                />
+                <button
+                  type="button"
+                  id="filter_k_m"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+              <li>
+                <div class="pedalTicks" id="filter_h_ticks" data-nb-ticks="20"></div>
+                <label for="filter_h">High</label>
+                <input
+                  type="range"
+                  id="filter_i_h"
+                  name="filter_h"
+                  min="0"
+                  max="1"
+                  value="0.5"
+                  step="0.05"
+                />
+                <button
+                  type="button"
+                  id="filter_k_h"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+            </ul>
+            <div class="pedalToggle">
+              <input
+                id="filter_active"
+                type="checkbox"
+                checked
+                onchange="sample.setFilter(!sample._eqState);"
+              />
+              <output class="pedalLed"></output>
+              <label for="filter_active" class="pedalButton"
+                >Enable / Disable</label
+              >
+            </div>
+            <h2>EQ</h2>
+          </div>
+          <div id="delay" class="pedalContainer">
+            <ul class="pedalKnobs">
+              <li>
+                <div class="pedalTicks" id="delay_m_ticks" data-nb-ticks="20"></div>
+                <label for="delay_m">Mix</label>
+                <input
+                  type="range"
+                  id="delay_i_m"
+                  name="delay_m"
+                  min="0"
+                  max="0.5"
+                  value="0.2"
+                  step="0.01"
+                />
+                <button
+                  type="button"
+                  id="delay_k_m"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+              <li>
+                <div class="pedalTicks" id="delay_s_ticks" data-nb-ticks="20"></div>
+                <label for="delay_s">Speed</label>
+                <input
+                  type="range"
+                  id="delay_i_s"
+                  name="delay_s"
+                  min="0"
+                  max="0.8"
+                  value="0.4"
+                  step="0.02"
+                />
+                <button
+                  type="button"
+                  id="delay_k_s"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+              <li>
+                <div class="pedalTicks" id="delay_f_ticks" data-nb-ticks="20"></div>
+                <label for="delay_f">Feedback</label>
+                <input
+                  type="range"
+                  id="delay_i_f"
+                  name="delay_f"
+                  min="0"
+                  max="0.5"
+                  value="0.2"
+                  step="0.01"
+                />
+                <button
+                  type="button"
+                  id="delay_k_f"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+            </ul>
+            <div class="pedalToggle">
+              <input
+                id="delay_active"
+                type="checkbox"
+                checked
+                onchange="sample.setDelay(!sample._delayState);"
+              />
+              <output class="pedalLed"></output>
+              <label for="delay_active" class="pedalButton"
+                >Enable / Disable</label
+              >
+            </div>
+            <h2>Delay</h2>
+          </div>
+          <div id="reverb" class="pedalContainer">
+            <ul class="pedalKnobs">
+              <li>
+                <div class="pedalTicks" id="reverb_m_ticks" data-nb-ticks="20"></div>
+                <label for="reverb_m">Mix</label>
+                <input
+                  type="range"
+                  id="reverb_i_m"
+                  name="reverb_m"
+                  min="0"
+                  max="0.7"
+                  value="0.2"
+                  step="0.02"
+                />
+                <button
+                  type="button"
+                  id="reverb_k_m"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+              <li>
+                <div class="pedalTicks" id="reverb_t_ticks" data-nb-ticks="4"></div>
+                <label for="reverb_t">Type</label>
+                <input
+                  type="range"
+                  id="reverb_i_t"
+                  name="reverb_t"
+                  min="0"
+                  max="0.75"
+                  value="0"
+                  step="0.25"
+                />
+                <button
+                  type="button"
+                  id="reverb_k_t"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+            </ul>
+            <div class="pedalToggle">
+              <input
+                id="reverb_active"
+                type="checkbox"
+                checked
+                onchange="sample.setReverb(!sample._reverbState);"
+              />
+              <output class="pedalLed"></output>
+              <label for="reverb_active" class="pedalButton"
+                >Enable / Disable</label
+              >
+            </div>
+            <h2>Reverb</h2>
+          </div>
+
+          <div id="cab" class="pedalContainer">
+            <ul class="pedalKnobs">
+              <li>
+                <div class="pedalTicks" id="cab_g_ticks" data-nb-ticks="20"></div>
+                <label for="cab_g">Gain</label>
+                <input
+                  type="range"
+                  id="cab_i_g"
+                  name="cab_g"
+                  min="0"
+                  max="1"
+                  value="0.5"
+                  step="0.02"
+                />
+                <button
+                  type="button"
+                  id="cab_k_g"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+              <li>
+                <div class="pedalTicks" id="cab_t_ticks" data-nb-ticks="4"></div>
+                <label for="cab_t">Type</label>
+                <input
+                  type="range"
+                  id="cab_i_t"
+                  name="cab_t"
+                  min="0"
+                  max="0.75"
+                  value="0"
+                  step="0.25"
+                />
+                <button
+                  type="button"
+                  id="cab_k_t"
+                  class="pedalKnob"
+                  style="--percentage: 10"
+                ></button>
+              </li>
+            </ul>
+            <div class="pedalToggle">
+              <input
+                id="cab_active"
+                type="checkbox"
+                checked
+                onchange="sample.setCab(!sample._cabState);"
+              />
+              <output class="pedalLed"></output>
+              <label for="cab_active" class="pedalButton"
+                >Enable / Disable</label
+              >
+            </div>
+            <h2>Cab</h2>
+          </div>
+
+          <div id="visual" class="pedalContainer">
+            <ul class="pedalVisual">
+              <canvas id="visualizer" width="200" height="200"></canvas>
+            </ul>
+            <div class="pedalToggle">
+              <input
+                id="visual_active"
+                checked
+                type="checkbox"
+                onchange="toggleVisualizer();"
+              />
+              <output class="pedalLed"></output>
+              <label for="visual_active" class="pedalButton"
+                >Enable / Disable</label
+              >
+            </div>
+            <h2>Spectrum</h2>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer" class="footerContainer">
+        <!-- <div class="footerDesc">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas
+        corrupti ratione doloremque perferendis harum, delectus, voluptatum
+        repudiandae magni cum earum totam suscipit maiores nostrum alias
+        quibusdam, vero natus. Amet, a?
+      </div> -->
+      </div>
+    </div>
+    <script src="js/init.js"></script>
+    <script src="js/pedal.js"></script>
+    <script src="js/config.js"></script>
+  </body>
+</html>
